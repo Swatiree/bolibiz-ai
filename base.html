@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}BoliBiz AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/">✦ BoliBiz AI</a>
+    <p class="muted">YOUR BUSINESS, SIMPLIFIED</p>
+    <nav>
+      <a href="/">▦ Dashboard</a>
+      <a href="/transactions">↔ Transactions</a>
+      <a href="/reports">▥ Reports</a>
+      <a href="/proposals">▤ Business Proposals</a>
+      <a href="/assistant">✧ AI Assistant</a>
+    </nav>
+    <div class="sidebar-bottom">Built for small businesses</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <span>Business workspace</span>
+      <span class="status">● Local prototype</span>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="notice {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% block title %}Proposal | BoliBiz AI{% endblock %}
+{% block content %}
+<div class="proposal-document">
+  <p class="eyebrow">BUSINESS PROPOSAL · {{ proposal["created_at"] }}</p>
+  <h1>{{ proposal["business_name"] }}</h1>
+  <p>{{ proposal["business_type"] }}{% if proposal["location"] %} · {{ proposal["location"] }}{% endif %}</p>
+
+  <hr>
+  <h2>Executive summary</h2>
+  <p>{{ proposal["summary"] }}</p>
+
+  <h2>Target customers</h2>
+  <p>{{ proposal["audience"] or "To be defined." }}</p>
+
+  <h2>Problem statement</h2>
+  <p>{{ proposal["problem"] }}</p>
+
+  <h2>Proposed solution</h2>
+  <p>{{ proposal["solution"] }}</p>
+
+  <h2>Estimated budget</h2>
+  <p>{{ proposal["budget"] or "To be determined." }}</p>
+
+  <h2>Timeline</h2>
+  <p>{{ proposal["timeline"] or "To be determined." }}</p>
+
+  <p class="muted">Review all assumptions and figures before sharing this proposal.</p>
+  <button class="btn no-print" onclick="window.print()">Print / Save as PDF</button>
+  <a class="secondary-btn no-print" href="/proposals">Back to proposals</a>
+</div>
+{% endblock %}

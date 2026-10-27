@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+{% block title %}Business Proposals | BoliBiz AI{% endblock %}
+{% block content %}
+<p class="eyebrow">PLAN YOUR NEXT MOVE</p>
+<h1>Business proposals</h1>
+<p class="muted">Prepare a structured proposal for a new business or project.</p>
+
+<div class="panel">
+  <form method="POST" class="form-grid">
+    <label>Business name *
+      <input name="business_name" required>
+    </label>
+    <label>Business type *
+      <input name="business_type" placeholder="Boutique, grocery, bakery..." required>
+    </label>
+    <label>Owner
+      <input name="owner_name">
+    </label>
+    <label>Location
+      <input name="location" placeholder="Puri, Odisha">
+    </label>
+    <label class="full-width">Target customers
+      <input name="audience" placeholder="Who will buy your products or services?">
+    </label>
+    <label class="full-width">Problem to solve *
+      <textarea name="problem" required></textarea>
+    </label>
+    <label class="full-width">Your proposed solution *
+      <textarea name="solution" required></textarea>
+    </label>
+    <label>Estimated budget
+      <input name="budget" placeholder="₹50,000">
+    </label>
+    <label>Timeline
+      <input name="timeline" placeholder="3 months">
+    </label>
+    <button class="btn" type="submit">Create and save proposal</button>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Saved proposals</h2>
+  {% for item in saved %}
+  <div class="transaction-row">
+    <div>
+      <strong>{{ item["business_name"] }}</strong>
+      <p class="muted">{{ item["business_type"] }} · {{ item["created_at"] }}</p>
+    </div>
+    <a href="/proposals/{{ item['id'] }}">Open proposal →</a>
+  </div>
+  {% else %}
+  <p class="muted">No proposals created yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% block title %}Business Assistant | BoliBiz AI{% endblock %}
+{% block content %}
+<p class="eyebrow">YOUR BUSINESS COPILOT</p>
+<h1>Ask BoliBiz</h1>
+<p class="muted">Ask about recorded sales, expenses or business proposals.</p>
+
+<div class="panel assistant-panel">
+  <form method="POST">
+    <label>Your question
+      <textarea name="question" required
+        placeholder="Example: What are my total sales?">{{ question }}</textarea>
+    </label>
+    <button class="btn" type="submit">Ask assistant →</button>
+  </form>
+
+  {% if answer %}
+  <div class="answer-card">
+    <h2>Response</h2>
+    <p>{{ answer }}</p>
+  </div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>Try asking</h2>
+  <ul>
+    <li>What are my total sales?</li>
+    <li>How much have I spent?</li>
+    <li>What is my recorded result?</li>
+    <li>How do I create a business proposal?</li>
+  </ul>
+</div>
+{% endblock %}

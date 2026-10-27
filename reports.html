@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+{% block title %}Reports | BoliBiz AI{% endblock %}
+{% block content %}
+<p class="eyebrow">BUSINESS INSIGHTS</p>
+<h1>Reports</h1>
+<p class="muted">Review your monthly sales and expenses.</p>
+
+<div class="panel">
+  <canvas id="reportChart" height="120"></canvas>
+</div>
+
+<div class="panel">
+  <h2>Monthly summary</h2>
+  {% for row in monthly %}
+  <div class="transaction-row">
+    <strong>{{ row["month"] }}</strong>
+    <span class="positive">Sales {{ row["sales"]|inr }}</span>
+    <span class="negative">Expenses {{ row["expenses"]|inr }}</span>
+  </div>
+  {% else %}
+  <p class="muted">Add transactions to generate reports.</p>
+  {% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const reportMonths = {{ monthly | map(attribute='month') | list | tojson }};
+const reportSales = {{ monthly | map(attribute='sales') | list | tojson }};
+const reportExpenses = {{ monthly | map(attribute='expenses') | list | tojson }};
+
+new Chart(document.getElementById('reportChart'), {
+  type: 'bar',
+  data: {
+    labels: reportMonths,
+    datasets: [
+      {label: 'Sales', data: reportSales},
+      {label: 'Expenses', data: reportExpenses}
+    ]
+  },
+  options: {responsive: true}
+});
+</script>
+{% endblock %}
